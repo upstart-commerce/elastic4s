@@ -1,6 +1,6 @@
 import Dependencies._
 
-ThisBuild / organizationName := "com.sksamuel.elastic4s"
+ThisBuild / organization := "com.upstartcommerce"
 
 def isGithubActions = sys.env.getOrElse("CI", "false") == "true"
 
@@ -42,18 +42,13 @@ lazy val commonSettings = Seq(
 )
 
 lazy val publishSettings = Seq(
-  publishMavenStyle := true,
-  Test / publishArtifact := false,
-  pomIncludeRepository := Function.const(false),
-  releaseCrossBuild := true,
-  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (isRelease)
-      Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    else
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-  }
+  publishTo := Some(
+    Resolver.url("upstartcommerce", url("https://upstartcommerce.jfrog.io/artifactory/nochannel"))(
+      Resolver.ivyStylePatterns
+    )
+  ),
+  credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+  publishMavenStyle := false
 )
 
 lazy val commonJvmSettings = Seq(
