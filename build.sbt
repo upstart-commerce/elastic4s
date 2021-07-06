@@ -5,7 +5,7 @@ ThisBuild / organization := "com.upstartcommerce"
 def isGithubActions = sys.env.getOrElse("CI", "false") == "true"
 
 // set by github actions when executing a release build
-def releaseVersion: String = sys.env.getOrElse("RELEASE_VERSION", "")
+def releaseVersion: String = sys.env.getOrElse("RELEASE_VERSION", "7.12.4")
 def isRelease = releaseVersion != ""
 
 // the version to use to publish - either from release version or a snapshot run number
@@ -20,8 +20,8 @@ def ossrhPassword = sys.env.getOrElse("OSSRH_PASSWORD", "")
 
 
 lazy val commonScalaVersionSettings = Seq(
-  scalaVersion := "2.12.14",
-  crossScalaVersions := Seq("2.12.14", "2.13.6")
+  scalaVersion := "2.13.6",
+  crossScalaVersions := Seq("2.13.6")
 )
 
 lazy val warnUnusedImport = Seq(
@@ -33,7 +33,7 @@ lazy val warnUnusedImport = Seq(
 )
 
 lazy val commonSettings = Seq(
-  organization := "com.sksamuel.elastic4s",
+  organization := "com.upstartcommerce",
   version := publishVersion,
   resolvers ++= Seq(Resolver.mavenLocal),
   Test / parallelExecution := false,
