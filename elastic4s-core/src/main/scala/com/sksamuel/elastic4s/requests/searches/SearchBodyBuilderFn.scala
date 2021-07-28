@@ -19,6 +19,7 @@ object SearchBodyBuilderFn {
 
     val builder = XContentFactory.jsonBuilder()
 
+    request.source.foreach(builder.field("_source", _))
     request.timeout.map(_.toMillis + "ms").foreach(builder.field("timeout", _))
     request.terminateAfter.map(_.toString).foreach(builder.field("terminate_after", _))
     request.version.map(_.toString).foreach(builder.field("version", _))

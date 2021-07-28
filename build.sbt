@@ -5,7 +5,7 @@ ThisBuild / organization := "com.upstartcommerce"
 def isGithubActions = sys.env.getOrElse("CI", "false") == "true"
 
 // set by github actions when executing a release build
-def releaseVersion: String = sys.env.getOrElse("RELEASE_VERSION", "7.12.4")
+def releaseVersion: String = sys.env.getOrElse("RELEASE_VERSION", "7.12.6")
 def isRelease = releaseVersion != ""
 
 // the version to use to publish - either from release version or a snapshot run number
